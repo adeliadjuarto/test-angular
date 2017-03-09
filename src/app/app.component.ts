@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
+  moduleId: module.id,
   selector: 'my-app',
   template: `
-    <div>test</div>
+    <a routerLink="/articles" routerLinkActive="active">Articles</a>
+    <router-outlet></router-outlet>
   `,
 })
 export class AppComponent  { }

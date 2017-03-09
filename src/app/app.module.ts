@@ -4,8 +4,10 @@ import { FormsModule }   from '@angular/forms';
 
 import { AppComponent }  from './app.component';
 import { ArticlesComponent } from './articles/articles.component';
+import { AppRoutingModule } from './app-routing.module';
+
 @NgModule({
-  imports:      [ BrowserModule, FormsModule ],
+  imports:      [ BrowserModule, FormsModule, AppRoutingModule ],
   declarations: [ AppComponent, ArticlesComponent ],
   bootstrap:    [ AppComponent ]
 })

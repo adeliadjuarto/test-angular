@@ -3,9 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ArticlesComponent }    from './articles.component';
 import { ArticleDetailComponent }  from './article-detail.component';
+import { TestEventEmitterComponent }  from './test-eventemitter.component';
+import { TestChildrenComponent }  from './test-children.component';
 
 const articlesRoutes: Routes = [
-  { path: 'articles',  component: ArticlesComponent },
+  { path: 'articles',  component: ArticlesComponent, children:[
+    {
+      path:'',
+      component:TestChildrenComponent
+    }
+  ] },
   { path: 'articles/detail/:id', component: ArticleDetailComponent }
 ];
 

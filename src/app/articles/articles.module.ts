@@ -6,6 +6,8 @@ import { ArticlesComponent }    from './articles.component';
 import { ArticleDetailComponent }  from './article-detail.component';
 import { ArticleService } from './article.service'; 
 import { ArticleRoutingModule } from './article-routing.module';
+import { TestEventEmitterComponent } from './test-eventemitter.component';
+import { TestChildrenComponent }  from './test-children.component';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { ArticleRoutingModule } from './article-routing.module';
   ],
   declarations: [
     ArticlesComponent,
-    ArticleDetailComponent
+    ArticleDetailComponent,
+    TestEventEmitterComponent,
+    TestChildrenComponent
   ],
   providers: [ ArticleService ]
 })

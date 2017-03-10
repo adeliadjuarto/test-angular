@@ -1,0 +1,49 @@
+<style>
+    .display{
+        display: block;
+    }
+    .hide{
+        display: none;
+    }
+    .article-item{
+        cursor: pointer;
+    }
+    .article-item:hover{
+        color:#888;
+    }
+</style>
+<div><button type="button" (click) = "toggleArticleForm()">{{toggleText}}</button></div>
+<div id="articleForm" [ngClass]="{'display':isVisible==true, 'hide':isVisible==false}">
+    <div>
+        <label for="articleTitle">Title</label>
+        <input type="text" #articleTitle id="articleTitle">
+    </div>
+    <div>
+        <label for="articleContent">Content</label><br>
+        <textarea cols="40" rows="5" #articleContent id="articleContent"></textarea>
+    </div>
+    <div><input type="submit" value="Add" (click) = "addArticle(articleTitle.value, articleContent.value)"></div>
+</div>
+<ul>
+    <li *ngFor="let article of articles | async"
+    [class.selected] = "isSelected(article)"
+    (click)="onSelect(article)"
+    class="article-item"
+    >
+            {{article.id}}. {{article.title}}
+    </li>
+</ul>
+<div>
+    Message For Child:
+    <input type="text" #messageForChild (keyup) = "0">
+</div>
+<test-eventemitter [message]="messageForChild.value" (sendMessageToParent)="messageFromChild = $event"></test-eventemitter>
+<div class="messageFromEventEmitter">{{messageFromChild}}</div>
+<br>
+<div>Test for routing using children:</div>
+<button (click)="showSomething()">Show Something</button>
+<button (click)="changeText()">Change Text</button>
+<router-outlet ></router-outlet>
+<div>Test for Parent:</div>
+<button (click)="changeParentText()">Change Parent Text</button>
+<div>{{parentText}}</div>

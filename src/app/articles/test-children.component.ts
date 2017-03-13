@@ -17,21 +17,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestChildrenComponent implements OnInit{
     isVisible: Boolean;
-    changedText:string;
+    public justText:string = "text from child";
     constructor(){}
     
     ngOnInit(){
         this.isVisible = false;
-        this.changedText = "text";
     }
     
     show(){
         this.isVisible = true;
     }
 
-    changeText(content:string){
-        this.changedText = content;
-        console.log(this.changedText);
+    returnJustText(){
+        return this.justText;
     }
 
  }

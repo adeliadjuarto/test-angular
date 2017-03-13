@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, AfterViewInit } from '@angular/core';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 import { Article, ArticleService } from './article.service';
@@ -9,7 +9,7 @@ import { TestChildrenComponent } from './test-children.component';
   selector: 'articles',
   templateUrl: './articles.component.html',
 })
-export class ArticlesComponent implements OnInit {
+export class ArticlesComponent implements OnInit, AfterViewInit {
     @ViewChild(TestChildrenComponent) children: TestChildrenComponent;
     articles: Observable<Article[]>;
     private selectedId:number;
@@ -19,13 +19,16 @@ export class ArticlesComponent implements OnInit {
     toggleText:string;
     messageFromChild:string;
     parentText:string;
+    textFromChild:string;
 
     constructor(
         private service:ArticleService,
         private route:ActivatedRoute,
         private router:Router
     ){}
-
+    ngAfterViewInit(){
+      this.textFromChild = this.children.justText;
+    }
     ngOnInit(){
       this.children = new TestChildrenComponent();
       this.service.getArticles().then(articles => this.maxArticleId = articles.length);
@@ -33,6 +36,7 @@ export class ArticlesComponent implements OnInit {
       this.toggleText = "Show Form";
       this.parentText = "Parent Text";
 
+      
         this.articles = this.route.params
       .switchMap((params: Params) => {
         this.selectedId = +params['id'];
@@ -63,10 +67,6 @@ export class ArticlesComponent implements OnInit {
 
     showSomething(){
       this.children.show();
-    }
-
-    changeText(){
-      this.children.changeText("changed text");
     }
 
     changeParentText(){
